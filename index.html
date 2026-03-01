@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔺 Teorema de Pitágoras</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --card: #263248;
+    --accent: #f59e0b;
+    --accent2: #10b981;
+    --accent3: #3b82f6;
+    --red: #ef4444;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: #334155;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at 20% 20%, #1e3a5f33 0%, transparent 50%),
+                      radial-gradient(ellipse at 80% 80%, #4a1d4033 0%, transparent 50%);
+  }
+
+  header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+  }
+
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--accent);
+    text-shadow: 0 0 30px #f59e0b55;
+    letter-spacing: 1px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-top: .4rem;
+  }
+
+  .formula-banner {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+  }
+
+  .formula {
+    background: linear-gradient(135deg, #1e3a5f, #1e293b);
+    border: 2px solid var(--accent3);
+    border-radius: 16px;
+    padding: .7rem 2rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    box-shadow: 0 0 20px #3b82f622;
+  }
+
+  .formula span { color: var(--accent); }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    max-width: 600px;
+    margin: .5rem auto 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85rem;
+    color: var(--muted);
+    margin-bottom: .4rem;
+  }
+
+  .progress-bar {
+    background: var(--border);
+    border-radius: 99px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent2));
+    transition: width .5s ease;
+  }
+
+  /* SCORE */
+  .scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-pill {
+    background: var(--surface);
+    border-radius: 99px;
+    padding: .4rem 1.2rem;
+    font-size: .9rem;
+    font-weight: 700;
+    border: 1.5px solid var(--border);
+  }
+
+  .score-pill.correct { border-color: var(--accent2); color: var(--accent2); }
+  .score-pill.wrong { border-color: var(--red); color: var(--red); }
+
+  /* CARD */
+  .card {
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    background: var(--card);
+    border-radius: 24px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 20px 60px #00000066;
+    animation: slideUp .4s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badge {
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    border-radius: 8px;
+    padding: .2rem .7rem;
+    font-size: .8rem;
+  }
+
+  .situation-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .situation-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+    margin-bottom: 1.2rem;
+  }
+
+  .situation-text strong { color: var(--accent); }
+
+  /* VISUAL TRIANGLE */
+  .triangle-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+  }
+
+  svg.triangle-svg {
+    filter: drop-shadow(0 0 12px #3b82f633);
+  }
+
+  /* INPUT AREA */
+  .input-row {
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .input-label {
+    font-weight: 700;
+    color: var(--accent3);
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .answer-input {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: .7rem 1rem;
+    font-size: 1.1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+  }
+
+  .answer-input:focus { border-color: var(--accent3); }
+
+  .unit-badge {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: .5rem .9rem;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: .95rem;
+  }
+
+  .btn-check {
+    background: linear-gradient(135deg, var(--accent3), #6366f1);
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: .7rem 1.8rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: .5px;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 20px #3b82f644;
+  }
+
+  .btn-check:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #3b82f655; }
+  .btn-check:active { transform: scale(.97); }
+
+  /* FEEDBACK */
+  .feedback {
+    margin-top: 1.2rem;
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    display: none;
+    animation: pop .3s ease;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(.9); opacity: 0; }
+    60% { transform: scale(1.04); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .feedback.correct {
+    background: #064e3b88;
+    border: 1.5px solid var(--accent2);
+    color: #6ee7b7;
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: #450a0a88;
+    border: 1.5px solid var(--red);
+    color: #fca5a5;
+    display: block;
+  }
+
+  .feedback .step {
+    font-weight: 600;
+    color: #94a3b8;
+    font-size: .92rem;
+    margin-top: .5rem;
+  }
+
+  /* NEXT BUTTON */
+  .btn-next {
+    display: none;
+    margin: 1rem auto 0;
+    background: linear-gradient(135deg, var(--accent), #f97316);
+    color: #000;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    padding: .8rem 2.5rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 20px #f59e0b44;
+  }
+
+  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #f59e0b55; }
+
+  /* COMPLETION */
+  .completion {
+    display: none;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .completion h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-bottom: .5rem;
+  }
+
+  .completion p { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+  .final-score {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent2);
+    margin: .5rem 0;
+  }
+
+  .btn-restart {
+    background: linear-gradient(135deg, var(--accent2), #0d9488);
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    padding: .9rem 2.5rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px #10b98144;
+    transition: transform .15s;
+  }
+  .btn-restart:hover { transform: translateY(-2px); }
+
+  /* EMOJI ICON */
+  .emoji-icon { font-size: 2rem; }
+
+  /* HINT */
+  .hint-box {
+    background: #1e3a5f55;
+    border: 1px dashed var(--accent3);
+    border-radius: 10px;
+    padding: .6rem 1rem;
+    margin-bottom: 1rem;
+    font-size: .92rem;
+    color: #93c5fd;
+  }
+
+  @media (max-width: 480px) {
+    .card { margin: 0 .8rem 2rem; }
+    .btn-check { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔺 Teorema de Pitágoras</h1>
+  <p>Situaciones reales para practicar</p>
+</header>
+
+<div class="formula-banner">
+  <div class="formula"><span>a²</span> + <span>b²</span> = <span>c²</span></div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-info">
+    <span id="progress-text">Problema 1 de 6</span>
+    <span id="progress-pct">0%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="score-pill correct">✅ Correctas: <span id="score-correct">0</span></div>
+  <div class="score-pill wrong">❌ Errores: <span id="score-wrong">0</span></div>
+</div>
+
+<div class="card" id="main-card">
+  <div class="card-header">
+    <span class="emoji-icon" id="prob-emoji">🏗️</span>
+    <div>
+      <div class="badge" id="prob-badge">HIPOTENUSA</div>
+      <div class="situation-title" id="prob-title">Título</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="situation-text" id="prob-text"></p>
+    <div class="hint-box" id="prob-hint"></div>
+    <div class="triangle-area">
+      <svg class="triangle-svg" id="triangle-svg" width="260" height="180" viewBox="0 0 260 180"></svg>
+    </div>
+    <div class="input-row">
+      <span class="input-label" id="input-label">¿Cuánto mide la hipotenusa?</span>
+      <input class="answer-input" type="number" id="answer-input" placeholder="Escribe aquí..." step="0.01" min="0">
+      <span class="unit-badge" id="unit-badge">m</span>
+      <button class="btn-check" onclick="checkAnswer()">Verificar ✓</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div style="text-align:center">
+      <button class="btn-next" id="btn-next" onclick="nextProblem()">Siguiente problema →</button>
+    </div>
+  </div>
+</div>
+
+<div class="card completion" id="completion-card">
+  <div class="completion" style="display:block">
+    <div style="font-size:3rem">🎉</div>
+    <h2>¡Excelente trabajo!</h2>
+    <p>Completaste todos los problemas</p>
+    <div class="final-score" id="final-score">0/6</div>
+    <p id="final-msg"></p>
+    <button class="btn-restart" onclick="restart()">🔄 Intentar de nuevo</button>
+  </div>
+</div>
+
+<script>
+const problems = [
+  {
+    emoji: "🏗️",
+    title: "La escalera del pintor",
+    type: "hipotenusa",
+    text: `Un pintor apoya una escalera contra una pared. La base de la escalera está a <strong>3 metros</strong> de la pared y llega hasta una altura de <strong>4 metros</strong>. ¿Cuánto mide la escalera?`,
+    hint: "💡 La escalera es la hipotenusa. Tienes los dos catetos: base = 3 m, altura = 4 m.",
+    a: 3, b: 4, answer: 5, unit: "m",
+    inputLabel: "¿Cuánto mide la escalera (hipotenusa)?",
+    badge: "HIPOTENUSA",
+    svgType: "hypotenuse",
+    labels: ["3 m", "4 m", "? m"],
+    steps: "√(3² + 4²) = √(9 + 16) = √25 = 5 m"
+  },
+  {
+    emoji: "⚽",
+    title: "El campo de fútbol",
+    type: "hipotenusa",
+    text: `Sebastián patea el balón desde una esquina del campo hasta la esquina opuesta en diagonal. El campo mide <strong>40 metros</strong> de largo y <strong>30 metros</strong> de ancho. ¿Qué distancia recorrió el balón?`,
+    hint: "💡 La diagonal del campo es la hipotenusa. Catetos: 40 m y 30 m.",
+    a: 40, b: 30, answer: 50, unit: "m",
+    inputLabel: "¿Cuánto mide la diagonal (hipotenusa)?",
+    badge: "HIPOTENUSA",
+    svgType: "hypotenuse",
+    labels: ["40 m", "30 m", "? m"],
+    steps: "√(40² + 30²) = √(1600 + 900) = √2500 = 50 m"
+  },
+  {
+    emoji: "🌲",
+    title: "El árbol caído",
+    type: "cateto",
+    text: `Un árbol se rompió a causa del viento. La parte caída mide <strong>13 metros</strong> (hipotenusa) y su extremo quedó a <strong>5 metros</strong> del tronco en el suelo. ¿A qué altura se rompió el árbol?`,
+    hint: "💡 Debes encontrar un cateto. Usa: cateto = √(hipotenusa² − cateto conocido²)",
+    a: 5, hyp: 13, answer: 12, unit: "m",
+    inputLabel: "¿A qué altura se rompió el árbol (cateto)?",
+    badge: "CATETO",
+    svgType: "cateto_b",
+    labels: ["5 m", "? m", "13 m"],
+    steps: "√(13² − 5²) = √(169 − 25) = √144 = 12 m"
+  },
+  {
+    emoji: "🏊",
+    title: "La piscina",
+    type: "cateto",
+    text: `Laura nada en diagonal cruzando una piscina rectangular. La diagonal mide <strong>10 metros</strong> y el ancho de la piscina es <strong>6 metros</strong>. ¿Cuánto mide el largo de la piscina?`,
+    hint: "💡 El largo es el cateto desconocido. Hipotenusa = 10 m, cateto conocido = 6 m.",
+    a: 6, hyp: 10, answer: 8, unit: "m",
+    inputLabel: "¿Cuánto mide el largo de la piscina (cateto)?",
+    badge: "CATETO",
+    svgType: "cateto_b",
+    labels: ["6 m", "? m", "10 m"],
+    steps: "√(10² − 6²) = √(100 − 36) = √64 = 8 m"
+  },
+  {
+    emoji: "🏙️",
+    title: "Entre dos edificios",
+    type: "hipotenusa",
+    text: `Dos edificios están separados <strong>9 metros</strong>. El primero mide 7 metros y el segundo mide <strong>19 metros</strong> de altura. Se lanza una cuerda desde la cima del edificio más alto hasta la base del otro. La diferencia de alturas entre los dos edificios es de <strong>12 metros</strong>. ¿Cuánto mide la cuerda?`,
+    hint: "💡 Catetos: separación horizontal = 9 m, diferencia de altura = 12 m.",
+    a: 9, b: 12, answer: 15, unit: "m",
+    inputLabel: "¿Cuánto mide la cuerda (hipotenusa)?",
+    badge: "HIPOTENUSA",
+    svgType: "hypotenuse",
+    labels: ["9 m", "12 m", "? m"],
+    steps: "√(9² + 12²) = √(81 + 144) = √225 = 15 m"
+  },
+  {
+    emoji: "🚢",
+    title: "El barco navegante",
+    type: "cateto",
+    text: `Un barco parte del puerto y navega <strong>20 km al norte</strong>. Luego continúa hacia el este. Al final, la distancia total entre el barco y el puerto es de <strong>25 km</strong>. ¿Cuántos kilómetros navegó hacia el este?`,
+    hint: "💡 La distancia total (25 km) es la hipotenusa, y 20 km es un cateto. ¡Encuentra el otro!",
+    a: 20, hyp: 25, answer: 15, unit: "km",
+    inputLabel: "¿Cuántos km navegó hacia el este (cateto)?",
+    badge: "CATETO",
+    svgType: "cateto_b",
+    labels: ["20 km", "? km", "25 km"],
+    steps: "√(25² − 20²) = √(625 − 400) = √225 = 15 km"
+  }
+];
+
+let current = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+
+function drawTriangle(svgEl, type, labels) {
+  svgEl.innerHTML = "";
+  const W = 260, H = 180;
+
+  // Points
+  const A = {x: 30, y: H - 30};   // bottom-left
+  const B = {x: W - 30, y: H - 30}; // bottom-right
+  const C = {x: 30, y: 30};        // top-left
+
+  const pts = `${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`;
+
+  // Triangle fill
+  const poly = document.createElementNS("http://www.w3.org/2000/svg","polygon");
+  poly.setAttribute("points", pts);
+  poly.setAttribute("fill","#1e3a5f66");
+  poly.setAttribute("stroke","#3b82f6");
+  poly.setAttribute("stroke-width","2");
+  svgEl.appendChild(poly);
+
+  // Right angle mark
+  const sq = document.createElementNS("http://www.w3.org/2000/svg","polyline");
+  sq.setAttribute("points",`${A.x+14},${A.y} ${A.x+14},${A.y-14} ${A.x},${A.y-14}`);
+  sq.setAttribute("fill","none");
+  sq.setAttribute("stroke","#94a3b8");
+  sq.setAttribute("stroke-width","1.5");
+  svgEl.appendChild(sq);
+
+  // Label positions
+  const labelsPos = [
+    {x: (A.x+B.x)/2, y: A.y+20, anchor:"middle"},   // bottom (cateto a)
+    {x: A.x-16, y: (A.y+C.y)/2, anchor:"middle"},    // left (cateto b)
+    {x: (B.x+C.x)/2+16, y: (B.y+C.y)/2-8, anchor:"start"} // hypotenuse
+  ];
+
+  const colors = ["#f59e0b","#10b981","#93c5fd"];
+  labels.forEach((lbl, i) => {
+    const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+    txt.setAttribute("x", labelsPos[i].x);
+    txt.setAttribute("y", labelsPos[i].y);
+    txt.setAttribute("text-anchor", labelsPos[i].anchor);
+    txt.setAttribute("fill", lbl.startsWith("?") ? "#ef4444" : colors[i]);
+    txt.setAttribute("font-size", "14");
+    txt.setAttribute("font-weight", "700");
+    txt.setAttribute("font-family", "Nunito, sans-serif");
+    txt.textContent = lbl;
+    svgEl.appendChild(txt);
+  });
+}
+
+function loadProblem() {
+  answered = false;
+  const p = problems[current];
+  
+  document.getElementById("prob-emoji").textContent = p.emoji;
+  document.getElementById("prob-badge").textContent = p.badge;
+  document.getElementById("prob-title").textContent = p.title;
+  document.getElementById("prob-text").innerHTML = p.text;
+  document.getElementById("prob-hint").textContent = p.hint;
+  document.getElementById("input-label").textContent = p.inputLabel;
+  document.getElementById("unit-badge").textContent = p.unit;
+  document.getElementById("answer-input").value = "";
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("btn-next").style.display = "none";
+  document.getElementById("answer-input").disabled = false;
+
+  const fill = Math.round((current / problems.length) * 100);
+  document.getElementById("progress-fill").style.width = fill + "%";
+  document.getElementById("progress-text").textContent = `Problema ${current+1} de ${problems.length}`;
+  document.getElementById("progress-pct").textContent = fill + "%";
+
+  drawTriangle(document.getElementById("triangle-svg"), p.svgType, p.labels);
+  document.getElementById("answer-input").focus();
+}
+
+function checkAnswer() {
+  if (answered) return;
+  const p = problems[current];
+  const val = parseFloat(document.getElementById("answer-input").value);
+  if (isNaN(val) || val <= 0) {
+    alert("Por favor escribe un número válido mayor que cero.");
+    return;
+  }
+
+  answered = true;
+  document.getElementById("answer-input").disabled = true;
+
+  const diff = Math.abs(val - p.answer);
+  const fb = document.getElementById("feedback");
+  const next = document.getElementById("btn-next");
+
+  if (diff < 0.1) {
+    correct++;
+    document.getElementById("score-correct").textContent = correct;
+    fb.className = "feedback correct";
+    fb.innerHTML = `✅ ¡Correcto! La respuesta es <strong>${p.answer} ${p.unit}</strong>.<div class="step">📐 Procedimiento: ${p.steps}</div>`;
+  } else {
+    wrong++;
+    document.getElementById("score-wrong").textContent = wrong;
+    fb.className = "feedback wrong";
+    fb.innerHTML = `❌ No es correcto. Tu respuesta fue <strong>${val} ${p.unit}</strong>.<br>La respuesta correcta es <strong>${p.answer} ${p.unit}</strong>.<div class="step">📐 Procedimiento: ${p.steps}</div>`;
+  }
+
+  fb.style.display = "block";
+  next.style.display = "block";
+}
+
+function nextProblem() {
+  current++;
+  if (current >= problems.length) {
+    showCompletion();
+  } else {
+    document.getElementById("main-card").style.animation = "none";
+    setTimeout(() => {
+      document.getElementById("main-card").style.animation = "slideUp .4s ease";
+      loadProblem();
+    }, 50);
+  }
+}
+
+function showCompletion() {
+  document.getElementById("main-card").style.display = "none";
+  const cc = document.getElementById("completion-card");
+  cc.style.display = "block";
+  document.getElementById("final-score").textContent = `${correct} / ${problems.length}`;
+  const pct = Math.round((correct/problems.length)*100);
+  let msg = "";
+  if (pct === 100) msg = "🌟 ¡Perfecto! Dominas el teorema de Pitágoras.";
+  else if (pct >= 66) msg = "👏 ¡Muy bien! Sigue practicando para dominar todos los casos.";
+  else msg = "💪 Buen intento. Revisa el procedimiento y vuelve a intentarlo.";
+  document.getElementById("final-msg").textContent = msg;
+}
+
+function restart() {
+  current = 0; correct = 0; wrong = 0;
+  document.getElementById("score-correct").textContent = 0;
+  document.getElementById("score-wrong").textContent = 0;
+  document.getElementById("completion-card").style.display = "none";
+  document.getElementById("main-card").style.display = "block";
+  loadProblem();
+}
+
+// Enter key
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    if (!answered) checkAnswer();
+    else {
+      const next = document.getElementById("btn-next");
+      if (next.style.display !== "none") nextProblem();
+    }
+  }
+});
+
+loadProblem();
+</script>
+</body>
+</html>
