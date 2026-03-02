@@ -7,25 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f172a;
-    --surface: #1e293b;
-    --card: #1a2744;
-    --accent: #f59e0b;
-    --accent2: #10b981;
-    --accent3: #60a5fa;
-    --red: #f87171;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --border: #2d4a7a;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --panel-left: #eef4ff;
+    --panel-right: #ffffff;
+    --accent: #d97706;
+    --accent2: #059669;
+    --accent3: #2563eb;
+    --red: #dc2626;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #cbd5e1;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-  }
+  html, body { width: 100%; height: 100%; overflow-x: hidden; }
 
   body {
     font-family: 'Nunito', sans-serif;
@@ -34,61 +30,57 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image:
-      radial-gradient(ellipse at 10% 10%, #1e3a8a22 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 90%, #312e8122 0%, transparent 50%);
   }
 
-  /* ── HEADER ── */
+  /* HEADER */
   header {
-    background: linear-gradient(135deg, #0f2952, #1a1f3c);
-    border-bottom: 3px solid var(--accent);
+    background: #1e3a8a;
     padding: 1rem 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
-    box-shadow: 0 4px 30px #00000055;
+    box-shadow: 0 4px 16px #00000033;
   }
 
   .header-left h1 {
     font-family: 'Fredoka One', cursive;
     font-size: clamp(1.8rem, 3.5vw, 3rem);
-    color: var(--accent);
-    text-shadow: 0 0 30px #f59e0b66;
+    color: #fbbf24;
     line-height: 1;
   }
 
   .header-left p {
-    color: var(--muted);
+    color: #93c5fd;
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     margin-top: 0.2rem;
   }
 
   .formula-box {
-    background: #0f2952;
-    border: 2px solid var(--accent3);
+    background: #ffffff;
+    border: 3px solid #fbbf24;
     border-radius: 16px;
     padding: 0.6rem 2rem;
     font-size: clamp(1.4rem, 2.5vw, 2.2rem);
     font-weight: 900;
     letter-spacing: 3px;
-    color: var(--accent3);
-    box-shadow: 0 0 25px #60a5fa33;
+    color: #1e3a8a;
   }
 
-  .formula-box span { color: var(--accent); }
+  .formula-box .fa { color: #d97706; }
+  .formula-box .fc { color: #059669; }
 
-  /* ── SCOREBOARD ── */
+  /* SCOREBOARD */
   .scoreboard {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2rem;
     padding: 0.8rem 2rem;
-    background: #0d1f3c;
-    border-bottom: 1px solid var(--border);
+    background: #ffffff;
+    border-bottom: 2px solid var(--border);
     flex-shrink: 0;
+    box-shadow: 0 2px 8px #00000011;
   }
 
   .score-pill {
@@ -96,16 +88,13 @@
     font-weight: 800;
     padding: 0.4rem 1.5rem;
     border-radius: 99px;
-    border: 2px solid;
+    border: 2.5px solid;
   }
 
-  .score-pill.correct { border-color: var(--accent2); color: var(--accent2); background: #064e3b33; }
-  .score-pill.wrong   { border-color: var(--red);     color: var(--red);     background: #450a0a33; }
+  .score-pill.correct { border-color: var(--accent2); color: var(--accent2); background: #d1fae5; }
+  .score-pill.wrong   { border-color: var(--red);     color: var(--red);     background: #fee2e2; }
 
-  .progress-wrap {
-    flex: 1;
-    max-width: 400px;
-  }
+  .progress-wrap { flex: 1; max-width: 400px; }
 
   .progress-info {
     display: flex;
@@ -116,29 +105,19 @@
     font-weight: 700;
   }
 
-  .progress-bar {
-    background: var(--border);
-    border-radius: 99px;
-    height: 12px;
-    overflow: hidden;
-  }
+  .progress-bar { background: #e2e8f0; border-radius: 99px; height: 14px; overflow: hidden; }
 
   .progress-fill {
     height: 100%;
     border-radius: 99px;
-    background: linear-gradient(90deg, var(--accent3), var(--accent2));
+    background: linear-gradient(90deg, #2563eb, #059669);
     transition: width 0.5s ease;
   }
 
-  /* ── MAIN CONTENT ── */
-  .main {
-    flex: 1;
-    display: flex;
-    gap: 0;
-    overflow: hidden;
-  }
+  /* MAIN */
+  .main { flex: 1; display: flex; overflow: hidden; }
 
-  /* ── LEFT PANEL: Situation ── */
+  /* LEFT PANEL */
   .panel-left {
     flex: 1.1;
     padding: 2rem 2.5rem;
@@ -146,31 +125,23 @@
     flex-direction: column;
     justify-content: center;
     border-right: 2px solid var(--border);
-    background: linear-gradient(160deg, #0f1f3d 0%, #0f172a 100%);
+    background: var(--panel-left);
   }
 
-  .prob-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
+  .prob-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
 
-  .prob-emoji {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1;
-  }
+  .prob-emoji { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; }
 
   .prob-meta { display: flex; flex-direction: column; gap: 0.4rem; }
 
   .badge {
     display: inline-block;
-    background: var(--accent);
-    color: #000;
+    background: #d97706;
+    color: #fff;
     font-weight: 900;
     border-radius: 8px;
     padding: 0.25rem 1rem;
-    font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+    font-size: clamp(0.85rem, 1.3vw, 1.15rem);
     letter-spacing: 1px;
   }
 
@@ -185,28 +156,25 @@
 
   .situation-text {
     font-size: clamp(1.2rem, 2.2vw, 1.9rem);
-    line-height: 1.7;
-    color: #cbd5e1;
+    line-height: 1.8;
+    color: #1e293b;
     margin-bottom: 1.5rem;
   }
 
-  .situation-text strong {
-    color: var(--accent);
-    font-size: 110%;
-  }
+  .situation-text strong { color: #b45309; font-size: 110%; }
 
   .hint-box {
-    background: #0f2952aa;
-    border: 2px dashed var(--accent3);
+    background: #dbeafe;
+    border: 2px solid #93c5fd;
     border-radius: 14px;
-    padding: 0.8rem 1.4rem;
+    padding: 0.9rem 1.4rem;
     font-size: clamp(1rem, 1.7vw, 1.4rem);
-    color: #93c5fd;
-    font-weight: 600;
+    color: #1d4ed8;
+    font-weight: 700;
     line-height: 1.5;
   }
 
-  /* ── RIGHT PANEL: Triangle + Answer ── */
+  /* RIGHT PANEL */
   .panel-right {
     flex: 0.9;
     padding: 1.5rem 2rem;
@@ -214,7 +182,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
+    background: var(--panel-right);
   }
 
   .triangle-area {
@@ -226,19 +195,14 @@
   }
 
   svg.triangle-svg {
-    filter: drop-shadow(0 0 18px #3b82f644);
+    filter: drop-shadow(0 4px 12px #00000018);
     width: 100%;
     max-width: 520px;
     height: auto;
   }
 
-  /* ── INPUT SECTION ── */
-  .answer-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  /* INPUT */
+  .answer-section { width: 100%; display: flex; flex-direction: column; gap: 0.9rem; }
 
   .input-label {
     font-size: clamp(1.1rem, 1.8vw, 1.6rem);
@@ -247,34 +211,29 @@
     text-align: center;
   }
 
-  .input-row {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-    justify-content: center;
-  }
+  .input-row { display: flex; gap: 0.8rem; align-items: center; justify-content: center; }
 
   .answer-input {
     flex: 1;
-    max-width: 280px;
-    background: var(--surface);
-    border: 3px solid var(--border);
-    border-radius: 16px;
+    max-width: 260px;
+    background: #f1f5f9;
+    border: 3px solid #cbd5e1;
+    border-radius: 14px;
     padding: 0.9rem 1.2rem;
     font-size: clamp(1.3rem, 2.2vw, 2rem);
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
     color: var(--text);
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     text-align: center;
   }
 
-  .answer-input:focus { border-color: var(--accent3); box-shadow: 0 0 0 4px #60a5fa22; }
+  .answer-input:focus { border-color: var(--accent3); background: #fff; box-shadow: 0 0 0 4px #2563eb18; }
 
   .unit-badge {
-    background: var(--surface);
-    border: 2px solid var(--border);
+    background: #e2e8f0;
+    border: 2px solid #cbd5e1;
     border-radius: 10px;
     padding: 0.7rem 1.2rem;
     font-weight: 800;
@@ -283,7 +242,7 @@
   }
 
   .btn-check {
-    background: linear-gradient(135deg, var(--accent3), #6366f1);
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
     color: #fff;
     font-family: 'Fredoka One', cursive;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
@@ -291,19 +250,18 @@
     border: none;
     border-radius: 16px;
     cursor: pointer;
-    letter-spacing: 0.5px;
     transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 25px #6366f144;
+    box-shadow: 0 4px 20px #2563eb33;
     width: 100%;
   }
 
-  .btn-check:hover  { transform: translateY(-2px); box-shadow: 0 8px 30px #6366f155; }
+  .btn-check:hover  { transform: translateY(-2px); }
   .btn-check:active { transform: scale(0.97); }
 
-  /* ── FEEDBACK ── */
+  /* FEEDBACK */
   .feedback {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 1rem 1.4rem;
     font-weight: 700;
     font-size: clamp(1rem, 1.6vw, 1.4rem);
@@ -318,31 +276,14 @@
     100% { transform: scale(1); opacity: 1; }
   }
 
-  .feedback.correct {
-    background: #064e3b88;
-    border: 2px solid var(--accent2);
-    color: #6ee7b7;
-    display: block;
-  }
-
-  .feedback.wrong {
-    background: #450a0a88;
-    border: 2px solid var(--red);
-    color: #fca5a5;
-    display: block;
-  }
-
-  .feedback .step {
-    font-weight: 600;
-    color: #94a3b8;
-    font-size: 0.9em;
-    margin-top: 0.4rem;
-  }
+  .feedback.correct { background: #dcfce7; border: 2.5px solid #16a34a; color: #14532d; display: block; }
+  .feedback.wrong   { background: #fee2e2; border: 2.5px solid #dc2626; color: #7f1d1d; display: block; }
+  .feedback .step   { font-weight: 600; color: #475569; font-size: 0.9em; margin-top: 0.4rem; }
 
   .btn-next {
     display: none;
-    background: linear-gradient(135deg, var(--accent), #f97316);
-    color: #000;
+    background: linear-gradient(135deg, #d97706, #ea580c);
+    color: #fff;
     font-family: 'Fredoka One', cursive;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
     padding: 0.9rem 2.5rem;
@@ -350,45 +291,35 @@
     border-radius: 16px;
     cursor: pointer;
     width: 100%;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 25px #f59e0b44;
+    transition: transform 0.15s;
+    box-shadow: 0 4px 20px #d9770633;
   }
 
   .btn-next:hover { transform: translateY(-2px); }
 
-  /* ── COMPLETION ── */
+  /* COMPLETION */
   #completion-card {
     display: none;
     flex: 1;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     text-align: center;
     padding: 3rem;
-    gap: 1.2rem;
+    gap: 1.5rem;
+    background: #f0f9ff;
   }
-
-  #completion-card .big-emoji { font-size: clamp(3rem, 7vw, 6rem); }
 
   #completion-card h2 {
     font-family: 'Fredoka One', cursive;
     font-size: clamp(2rem, 4vw, 3.5rem);
-    color: var(--accent);
+    color: #1e3a8a;
   }
 
-  #completion-card p {
-    color: var(--muted);
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
-  }
-
-  .final-score {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 900;
-    color: var(--accent2);
-  }
+  .final-score { font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; color: var(--accent2); }
 
   .btn-restart {
-    background: linear-gradient(135deg, var(--accent2), #0d9488);
+    background: linear-gradient(135deg, #059669, #0d9488);
     color: #fff;
     font-family: 'Fredoka One', cursive;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
@@ -396,7 +327,7 @@
     border: none;
     border-radius: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 25px #10b98144;
+    box-shadow: 0 4px 20px #05966933;
     transition: transform 0.15s;
   }
 
@@ -405,16 +336,16 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="header-left">
     <h1>🔺 Teorema de Pitágoras</h1>
     <p>Situaciones reales para practicar</p>
   </div>
-  <div class="formula-box"><span>a²</span> + <span>b²</span> = <span style="color:#10b981">c²</span></div>
+  <div class="formula-box">
+    <span class="fa">a²</span> + <span class="fa">b²</span> = <span class="fc">c²</span>
+  </div>
 </header>
 
-<!-- SCOREBOARD -->
 <div class="scoreboard">
   <div class="score-pill correct">✅ Correctas: <span id="score-correct">0</span></div>
   <div class="progress-wrap">
@@ -429,10 +360,7 @@
   <div class="score-pill wrong">❌ Errores: <span id="score-wrong">0</span></div>
 </div>
 
-<!-- MAIN -->
 <div class="main" id="main-content">
-
-  <!-- LEFT: Situación -->
   <div class="panel-left">
     <div class="prob-header">
       <div class="prob-emoji" id="prob-emoji">🏗️</div>
@@ -445,7 +373,6 @@
     <div class="hint-box" id="prob-hint"></div>
   </div>
 
-  <!-- RIGHT: Triángulo + Input -->
   <div class="panel-right">
     <div class="triangle-area">
       <svg class="triangle-svg" id="triangle-svg" viewBox="0 0 400 300"></svg>
@@ -463,155 +390,122 @@
   </div>
 </div>
 
-<!-- COMPLETION -->
-<div class="main" id="completion-card" style="display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:3rem; gap:1.5rem;">
+<div class="main" id="completion-card">
   <div style="font-size:clamp(3rem,7vw,6rem)">🎉</div>
-  <h2 style="font-family:'Fredoka One',cursive; font-size:clamp(2rem,4vw,3.5rem); color:var(--accent);">¡Excelente trabajo!</h2>
-  <p style="color:var(--muted); font-size:clamp(1.1rem,2vw,1.6rem);">Completaste todos los problemas</p>
-  <div style="font-size:clamp(3rem,6vw,5rem); font-weight:900; color:var(--accent2);" id="final-score">0/6</div>
-  <p id="final-msg" style="font-size:clamp(1.1rem,2vw,1.5rem); color:var(--text); max-width:600px;"></p>
+  <h2>¡Excelente trabajo!</h2>
+  <p style="color:#475569; font-size:clamp(1.1rem,2vw,1.6rem);">Completaste todos los problemas</p>
+  <div class="final-score" id="final-score">0/6</div>
+  <p id="final-msg" style="font-size:clamp(1.1rem,2vw,1.5rem); color:#1e293b; max-width:600px;"></p>
   <button class="btn-restart" onclick="restart()">🔄 Intentar de nuevo</button>
 </div>
 
 <script>
 const problems = [
   {
-    emoji: "🏗️",
-    title: "La escalera del pintor",
-    type: "hipotenusa",
-    text: `Un pintor apoya una escalera contra una pared. La base de la escalera está a <strong>3 metros</strong> de la pared y llega hasta una altura de <strong>4 metros</strong>. ¿Cuánto mide la escalera?`,
-    hint: "💡 La escalera es la hipotenusa. Tienes los dos catetos: base = 3 m, altura = 4 m.",
-    answer: 5, unit: "m",
-    inputLabel: "¿Cuánto mide la escalera (hipotenusa)?",
-    badge: "HIPOTENUSA",
-    labels: ["3 m", "4 m", "? m"],
-    steps: "√(3² + 4²) = √(9 + 16) = √25 = 5 m"
+    emoji:"🦅", title:"El vuelo del dron", type:"hipotenusa",
+    text:`Un dron despega verticalmente <strong>6 metros</strong> desde el suelo y luego se desplaza horizontalmente <strong>8 metros</strong> hasta llegar a su destino. ¿Cuál es la distancia en línea recta entre el punto de despegue y el destino?`,
+    hint:"💡 La distancia en línea recta es la hipotenusa. Catetos: altura = 6 m, desplazamiento = 8 m.",
+    answer:10, unit:"m", badge:"HIPOTENUSA",
+    inputLabel:"¿Cuánto mide la distancia en línea recta (hipotenusa)?",
+    labels:["8 m","6 m","? m"], steps:"√(6² + 8²) = √(36 + 64) = √100 = 10 m"
   },
   {
-    emoji: "⚽",
-    title: "El campo de fútbol",
-    type: "hipotenusa",
-    text: `Sebastián patea el balón desde una esquina del campo hasta la esquina opuesta en diagonal. El campo mide <strong>40 metros</strong> de largo y <strong>30 metros</strong> de ancho. ¿Qué distancia recorrió el balón?`,
-    hint: "💡 La diagonal del campo es la hipotenusa. Catetos: 40 m y 30 m.",
-    answer: 50, unit: "m",
-    inputLabel: "¿Cuánto mide la diagonal (hipotenusa)?",
-    badge: "HIPOTENUSA",
-    labels: ["40 m", "30 m", "? m"],
-    steps: "√(40² + 30²) = √(1600 + 900) = √2500 = 50 m"
+    emoji:"🚲", title:"La rampa de ciclismo", type:"cateto",
+    text:`Una rampa para bicicletas mide <strong>17 metros</strong> de largo (hipotenusa) y su base horizontal ocupa <strong>15 metros</strong> del suelo. ¿A qué altura llega la rampa en su punto más alto?`,
+    hint:"💡 Debes encontrar la altura (cateto). Usa: cateto = √(hipotenusa² − cateto conocido²)",
+    answer:8, unit:"m", badge:"CATETO",
+    inputLabel:"¿A qué altura llega la rampa (cateto)?",
+    labels:["15 m","? m","17 m"], steps:"√(17² − 15²) = √(289 − 225) = √64 = 8 m"
   },
   {
-    emoji: "🌲",
-    title: "El árbol caído",
-    type: "cateto",
-    text: `Un árbol se rompió a causa del viento. La parte caída mide <strong>13 metros</strong> (hipotenusa) y su extremo quedó a <strong>5 metros</strong> del tronco en el suelo. ¿A qué altura se rompió el árbol?`,
-    hint: "💡 Debes encontrar un cateto. Usa: cateto = √(hipotenusa² − cateto conocido²)",
-    answer: 12, unit: "m",
-    inputLabel: "¿A qué altura se rompió el árbol (cateto)?",
-    badge: "CATETO",
-    labels: ["5 m", "? m", "13 m"],
-    steps: "√(13² − 5²) = √(169 − 25) = √144 = 12 m"
+    emoji:"🌲", title:"El árbol caído", type:"cateto",
+    text:`Un árbol se rompió a causa del viento. La parte caída mide <strong>13 metros</strong> (hipotenusa) y su extremo quedó a <strong>5 metros</strong> del tronco. ¿A qué altura se rompió el árbol?`,
+    hint:"💡 Debes encontrar un cateto. Usa: cateto = √(hipotenusa² − cateto conocido²)",
+    answer:12, unit:"m", badge:"CATETO",
+    inputLabel:"¿A qué altura se rompió el árbol (cateto)?",
+    labels:["5 m","? m","13 m"], steps:"√(13² − 5²) = √144 = 12 m"
   },
   {
-    emoji: "🏊",
-    title: "La piscina",
-    type: "cateto",
-    text: `Laura nada en diagonal cruzando una piscina rectangular. La diagonal mide <strong>10 metros</strong> y el ancho de la piscina es <strong>6 metros</strong>. ¿Cuánto mide el largo de la piscina?`,
-    hint: "💡 El largo es el cateto desconocido. Hipotenusa = 10 m, cateto conocido = 6 m.",
-    answer: 8, unit: "m",
-    inputLabel: "¿Cuánto mide el largo de la piscina (cateto)?",
-    badge: "CATETO",
-    labels: ["6 m", "? m", "10 m"],
-    steps: "√(10² − 6²) = √(100 − 36) = √64 = 8 m"
+    emoji:"🏊", title:"La piscina", type:"cateto",
+    text:`Laura nada en diagonal cruzando una piscina rectangular. La diagonal mide <strong>10 metros</strong> y el ancho es <strong>6 metros</strong>. ¿Cuánto mide el largo de la piscina?`,
+    hint:"💡 El largo es el cateto desconocido. Hipotenusa = 10 m, cateto conocido = 6 m.",
+    answer:8, unit:"m", badge:"CATETO",
+    inputLabel:"¿Cuánto mide el largo de la piscina (cateto)?",
+    labels:["6 m","? m","10 m"], steps:"√(10² − 6²) = √64 = 8 m"
   },
   {
-    emoji: "🏙️",
-    title: "Entre dos edificios",
-    type: "hipotenusa",
-    text: `Se lanza una cuerda desde la cima de un edificio hasta la base del edificio vecino. La separación horizontal entre ellos es de <strong>9 metros</strong> y la diferencia de alturas es de <strong>12 metros</strong>. ¿Cuánto mide la cuerda?`,
-    hint: "💡 Catetos: separación horizontal = 9 m, diferencia de altura = 12 m.",
-    answer: 15, unit: "m",
-    inputLabel: "¿Cuánto mide la cuerda (hipotenusa)?",
-    badge: "HIPOTENUSA",
-    labels: ["9 m", "12 m", "? m"],
-    steps: "√(9² + 12²) = √(81 + 144) = √225 = 15 m"
+    emoji:"🏙️", title:"Entre dos edificios", type:"hipotenusa",
+    text:`Se lanza una cuerda desde la cima de un edificio hasta la base del vecino. La separación horizontal es <strong>9 metros</strong> y la diferencia de alturas es <strong>12 metros</strong>. ¿Cuánto mide la cuerda?`,
+    hint:"💡 Catetos: separación horizontal = 9 m, diferencia de altura = 12 m.",
+    answer:15, unit:"m", badge:"HIPOTENUSA",
+    inputLabel:"¿Cuánto mide la cuerda (hipotenusa)?",
+    labels:["9 m","12 m","? m"], steps:"√(9² + 12²) = √225 = 15 m"
   },
   {
-    emoji: "🚢",
-    title: "El barco navegante",
-    type: "cateto",
-    text: `Un barco navega <strong>20 km al norte</strong> desde el puerto. Luego continúa hacia el este. Al final, la distancia total entre el barco y el puerto es de <strong>25 km</strong>. ¿Cuántos km navegó hacia el este?`,
-    hint: "💡 La distancia total (25 km) es la hipotenusa. El recorrido al norte (20 km) es un cateto.",
-    answer: 15, unit: "km",
-    inputLabel: "¿Cuántos km navegó hacia el este (cateto)?",
-    badge: "CATETO",
-    labels: ["20 km", "? km", "25 km"],
-    steps: "√(25² − 20²) = √(625 − 400) = √225 = 15 km"
+    emoji:"🚢", title:"El barco navegante", type:"cateto",
+    text:`Un barco navega <strong>20 km al norte</strong> desde el puerto, luego continúa hacia el este. La distancia total hasta el puerto es <strong>25 km</strong>. ¿Cuántos km navegó hacia el este?`,
+    hint:"💡 La distancia total (25 km) es la hipotenusa. El recorrido al norte (20 km) es un cateto.",
+    answer:15, unit:"km", badge:"CATETO",
+    inputLabel:"¿Cuántos km navegó hacia el este (cateto)?",
+    labels:["20 km","? km","25 km"], steps:"√(25² − 20²) = √225 = 15 km"
   }
 ];
 
-let current = 0, correct = 0, wrong = 0, answered = false;
+let current=0, correct=0, wrong=0, answered=false;
 
 function drawTriangle(svgEl, labels) {
   svgEl.innerHTML = "";
-  const W = 400, H = 300;
-  const A = {x: 50,     y: H - 50};
-  const B = {x: W - 50, y: H - 50};
-  const C = {x: 50,     y: 50};
+  const W=400, H=300;
+  const A={x:50, y:H-50}, B={x:W-50, y:H-50}, C={x:50, y:50};
 
-  // Shadow/glow polygon
-  const glow = document.createElementNS("http://www.w3.org/2000/svg","polygon");
-  glow.setAttribute("points",`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`);
-  glow.setAttribute("fill","#1e3a8a44");
-  glow.setAttribute("stroke","none");
-  svgEl.appendChild(glow);
-
-  // Main triangle
   const poly = document.createElementNS("http://www.w3.org/2000/svg","polygon");
   poly.setAttribute("points",`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`);
-  poly.setAttribute("fill","#1e3a8a33");
-  poly.setAttribute("stroke","#60a5fa");
-  poly.setAttribute("stroke-width","3");
+  poly.setAttribute("fill","#dbeafe");
+  poly.setAttribute("stroke","#2563eb");
+  poly.setAttribute("stroke-width","3.5");
   poly.setAttribute("stroke-linejoin","round");
   svgEl.appendChild(poly);
 
-  // Right angle mark
   const sq = document.createElementNS("http://www.w3.org/2000/svg","polyline");
-  sq.setAttribute("points",`${A.x+20},${A.y} ${A.x+20},${A.y-20} ${A.x},${A.y-20}`);
+  sq.setAttribute("points",`${A.x+22},${A.y} ${A.x+22},${A.y-22} ${A.x},${A.y-22}`);
   sq.setAttribute("fill","none");
-  sq.setAttribute("stroke","#94a3b8");
+  sq.setAttribute("stroke","#64748b");
   sq.setAttribute("stroke-width","2");
   svgEl.appendChild(sq);
 
-  // Labels config
   const labelsPos = [
-    {x: (A.x+B.x)/2, y: A.y + 36, anchor: "middle"},       // bottom cateto
-    {x: A.x - 28,    y: (A.y+C.y)/2, anchor: "middle"},     // left cateto
-    {x: (B.x+C.x)/2 + 24, y: (B.y+C.y)/2 - 12, anchor: "start"} // hypotenuse
+    {x:(A.x+B.x)/2, y:A.y+38, anchor:"middle"},
+    {x:A.x-30, y:(A.y+C.y)/2+6, anchor:"middle"},
+    {x:(B.x+C.x)/2+26, y:(B.y+C.y)/2-10, anchor:"start"}
   ];
 
-  const colors = ["#f59e0b", "#10b981", "#93c5fd"];
+  const colors=["#b45309","#059669","#1d4ed8"];
+  const bgColors=["#fef3c7","#d1fae5","#dbeafe"];
 
-  labels.forEach((lbl, i) => {
+  labels.forEach((lbl,i) => {
     const isUnknown = lbl.startsWith("?");
+    const approxW = lbl.length*13+20;
+    const bx = labelsPos[i].anchor==="middle" ? labelsPos[i].x-approxW/2 : labelsPos[i].x-4;
+
     const bg = document.createElementNS("http://www.w3.org/2000/svg","rect");
-    const fontSize = 20;
-    const approxW = lbl.length * 13 + 16;
-    bg.setAttribute("x", labelsPos[i].x - (labelsPos[i].anchor === "middle" ? approxW/2 : 0) - 6);
-    bg.setAttribute("y", labelsPos[i].y - fontSize + 2);
+    bg.setAttribute("x", bx);
+    bg.setAttribute("y", labelsPos[i].y-20+2);
     bg.setAttribute("width", approxW);
-    bg.setAttribute("height", fontSize + 8);
-    bg.setAttribute("rx", "6");
-    bg.setAttribute("fill", isUnknown ? "#450a0a99" : "#0f172acc");
+    bg.setAttribute("height", 30);
+    bg.setAttribute("rx","7");
+    bg.setAttribute("fill", isUnknown ? "#fee2e2" : bgColors[i]);
+    bg.setAttribute("stroke", isUnknown ? "#dc2626" : colors[i]);
+    bg.setAttribute("stroke-width","1.5");
     svgEl.appendChild(bg);
 
     const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
     txt.setAttribute("x", labelsPos[i].x);
     txt.setAttribute("y", labelsPos[i].y);
     txt.setAttribute("text-anchor", labelsPos[i].anchor);
-    txt.setAttribute("fill", isUnknown ? "#ef4444" : colors[i]);
-    txt.setAttribute("font-size", "20");
-    txt.setAttribute("font-weight", "800");
-    txt.setAttribute("font-family", "Nunito, sans-serif");
+    txt.setAttribute("fill", isUnknown ? "#dc2626" : colors[i]);
+    txt.setAttribute("font-size","20");
+    txt.setAttribute("font-weight","800");
+    txt.setAttribute("font-family","Nunito, sans-serif");
     txt.textContent = lbl;
     svgEl.appendChild(txt);
   });
@@ -620,29 +514,24 @@ function drawTriangle(svgEl, labels) {
 function loadProblem() {
   answered = false;
   const p = problems[current];
-
-  document.getElementById("prob-emoji").textContent   = p.emoji;
+  document.getElementById("prob-emoji").textContent  = p.emoji;
   const badgeEl = document.getElementById("prob-badge");
   badgeEl.textContent = p.badge;
-  badgeEl.className   = "badge" + (p.type === "cateto" ? " cateto" : "");
-  document.getElementById("prob-title").textContent   = p.title;
-  document.getElementById("prob-text").innerHTML      = p.text;
-  document.getElementById("prob-hint").textContent    = p.hint;
-  document.getElementById("input-label").textContent  = p.inputLabel;
-  document.getElementById("unit-badge").textContent   = p.unit;
-  document.getElementById("answer-input").value       = "";
-  document.getElementById("answer-input").disabled    = false;
-
+  badgeEl.className   = "badge" + (p.type==="cateto" ? " cateto" : "");
+  document.getElementById("prob-title").textContent  = p.title;
+  document.getElementById("prob-text").innerHTML     = p.text;
+  document.getElementById("prob-hint").textContent   = p.hint;
+  document.getElementById("input-label").textContent = p.inputLabel;
+  document.getElementById("unit-badge").textContent  = p.unit;
+  document.getElementById("answer-input").value      = "";
+  document.getElementById("answer-input").disabled   = false;
   const fb = document.getElementById("feedback");
-  fb.className = "feedback";
-  fb.style.display = "none";
+  fb.className = "feedback"; fb.style.display = "none";
   document.getElementById("btn-next").style.display = "none";
-
-  const pct = Math.round((current / problems.length) * 100);
-  document.getElementById("progress-fill").style.width = pct + "%";
+  const pct = Math.round((current/problems.length)*100);
+  document.getElementById("progress-fill").style.width = pct+"%";
   document.getElementById("progress-text").textContent = `Problema ${current+1} de ${problems.length}`;
-  document.getElementById("progress-pct").textContent  = pct + "%";
-
+  document.getElementById("progress-pct").textContent  = pct+"%";
   drawTriangle(document.getElementById("triangle-svg"), p.labels);
   setTimeout(() => document.getElementById("answer-input").focus(), 100);
 }
@@ -651,16 +540,12 @@ function checkAnswer() {
   if (answered) return;
   const p   = problems[current];
   const val = parseFloat(document.getElementById("answer-input").value);
-  if (isNaN(val) || val <= 0) { alert("Por favor escribe un número válido mayor que cero."); return; }
-
+  if (isNaN(val)||val<=0) { alert("Por favor escribe un número válido mayor que cero."); return; }
   answered = true;
   document.getElementById("answer-input").disabled = true;
-
-  const diff = Math.abs(val - p.answer);
+  const diff = Math.abs(val-p.answer);
   const fb   = document.getElementById("feedback");
-  const next = document.getElementById("btn-next");
-
-  if (diff < 0.1) {
+  if (diff<0.1) {
     correct++;
     document.getElementById("score-correct").textContent = correct;
     fb.className = "feedback correct";
@@ -669,42 +554,39 @@ function checkAnswer() {
     wrong++;
     document.getElementById("score-wrong").textContent = wrong;
     fb.className = "feedback wrong";
-    fb.innerHTML = `❌ Tu respuesta: <strong>${val} ${p.unit}</strong> — Respuesta correcta: <strong>${p.answer} ${p.unit}</strong><div class="step">📐 Procedimiento: ${p.steps}</div>`;
+    fb.innerHTML = `❌ Tu respuesta: <strong>${val} ${p.unit}</strong> — Correcta: <strong>${p.answer} ${p.unit}</strong><div class="step">📐 Procedimiento: ${p.steps}</div>`;
   }
-
   fb.style.display = "block";
-  next.style.display = "block";
+  document.getElementById("btn-next").style.display = "block";
 }
 
 function nextProblem() {
   current++;
-  if (current >= problems.length) {
-    document.getElementById("main-content").style.display  = "none";
+  if (current>=problems.length) {
+    document.getElementById("main-content").style.display = "none";
     document.getElementById("completion-card").style.display = "flex";
     document.getElementById("final-score").textContent = `${correct} / ${problems.length}`;
-    const pct = Math.round((correct / problems.length) * 100);
+    const pct = Math.round((correct/problems.length)*100);
     document.getElementById("final-msg").textContent =
-      pct === 100 ? "🌟 ¡Perfecto! Dominas el teorema de Pitágoras." :
-      pct >= 66   ? "👏 ¡Muy bien! Sigue practicando para dominar todos los casos." :
-                    "💪 Buen intento. Revisa el procedimiento y vuelve a intentarlo.";
-  } else {
-    loadProblem();
-  }
+      pct===100 ? "🌟 ¡Perfecto! Dominas el teorema de Pitágoras." :
+      pct>=66   ? "👏 ¡Muy bien! Sigue practicando para dominar todos los casos." :
+                  "💪 Buen intento. Revisa el procedimiento y vuelve a intentarlo.";
+  } else { loadProblem(); }
 }
 
 function restart() {
-  current = correct = wrong = 0;
-  document.getElementById("score-correct").textContent   = 0;
-  document.getElementById("score-wrong").textContent     = 0;
+  current=correct=wrong=0;
+  document.getElementById("score-correct").textContent = 0;
+  document.getElementById("score-wrong").textContent   = 0;
   document.getElementById("completion-card").style.display = "none";
   document.getElementById("main-content").style.display   = "flex";
   loadProblem();
 }
 
 document.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
+  if (e.key==="Enter") {
     if (!answered) checkAnswer();
-    else if (document.getElementById("btn-next").style.display !== "none") nextProblem();
+    else if (document.getElementById("btn-next").style.display!=="none") nextProblem();
   }
 });
 
